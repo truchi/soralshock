@@ -1,31 +1,29 @@
-import Gamepad, { MAP } from './gamepad.js'
+import Gamepad, { MAP } from './Gamepad.js'
+import SoundBox from './SoundBox.js'
 
 let $target
 let $connected
 let $disconnected
+let $sounds
 let gamepad
+let soundbox
 window.gamepad = gamepad
+window.soundbox = soundbox
+window.$sounds = $sounds
 
 const onLoad = () => {
   $target = document.querySelector('.target')
   $connected = document.querySelector('.connected')
   $disconnected = document.querySelector('.disconnected')
+  $sounds = [...$connected.querySelectorAll('audio')]
 
   window.addEventListener('gamepadconnected', onConnect)
 }
 
 const onConnect = (event) => {
   gamepad = new Gamepad(navigator.getGamepads()[0], $target).listen()
-
-  MAP.map(button => {
-    $target.addEventListener(`GamePad-${button}-pressed`, (event) => {
-      console.log(button, 'pressed', event)
-    })
-
-    $target.addEventListener(`GamePad-${button}-released`, (event) => {
-      console.log(button, 'released', event)
-    })
-  })
+  soundbox = new SoundBox($sounds, $target).listen()
+  console.log('CONNECTED', gamepad)
 
   window.removeEventListener('gamepadconnected', onConnect)
   window.addEventListener('gamepaddisconnected', onDisconnect)
@@ -35,6 +33,7 @@ const onConnect = (event) => {
 
 const onDisconnect = (event) => {
   gamepad.unlisten()
+  soundbox.unlisten()
   window.removeEventListener('gamepaddisconnected', onDisconnect)
   window.addEventListener('gamepadconnected', onConnect)
   $connected.classList.add('hidden')

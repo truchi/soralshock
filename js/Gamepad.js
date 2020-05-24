@@ -10,7 +10,6 @@ export default class Gamepad {
       r1: false, r2: false, r3: false,
       l1: false, l2: false, l3: false,
     }
-    console.log('CONNECTED', this.gamepad)
   }
 
   unlisten() {

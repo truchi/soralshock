@@ -2,25 +2,51 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <script type="module" src="./gamepad.js"></script>
-    <script type="module" src="./main.js"></script>
+    <script type="module" src="./js/Gamepad.js"></script>
+    <script type="module" src="./js/SoundBox.js"></script>
+    <script type="module" src="./js/main.js"></script>
     <link rel="stylesheet" href="./styles.css">
   </head>
   <body>
     <div class="target hidden"></div>
-    <div class="hidden">
-      <audio preload="auto" src="./sounds/cpasmoi.webm" />
-      <audio preload="auto" src="./sounds/encu.webm" />
-      <audio preload="auto" src="./sounds/fautlsavoir.webm" />
-      <audio preload="auto" src="./sounds/femme.webm" />
-      <audio preload="auto" src="./sounds/jaiunelada.webm" />
-      <audio preload="auto" src="./sounds/prout.webm" />
-      <audio preload="auto" src="./sounds/sociologue.webm" />
-      <audio preload="auto" src="./sounds/sodo.webm" />
-      <audio preload="auto" src="./sounds/talent.webm" />
-    </div>
     <div class="connected hidden">
       Gamepad connected
+      <div>
+        X: "C'est pas moi ..."
+        <audio button="x" preload="auto" src="./sounds/cpasmoi.webm" />
+      </div>
+      <div>
+        O: "Ca s'enc..."
+        <audio button="o" preload="auto" src="./sounds/encu.webm" />
+      </div>
+      <div>
+        TRIANGLE: "Faut l'savoir"
+        <audio button="t" preload="auto" src="./sounds/fautlsavoir.webm" />
+      </div>
+      <div>
+        SQUARE: "J'ai b... sa femme"
+        <audio button="s" preload="auto" src="./sounds/femme.webm" />
+      </div>
+      <div>
+        UP: "J'ai une lada ..."
+        <audio button="u" preload="auto" src="./sounds/jaiunelada.webm" />
+      </div>
+      <div>
+        DOWN: "Prout"
+        <audio button="d" preload="auto" src="./sounds/prout.webm" />
+      </div>
+      <div>
+        LEFT: "Je suis un vrai ..."
+        <audio button="l" preload="auto" src="./sounds/sociologue.webm" />
+      </div>
+      <div>
+        RIGHT: "Je rapelle que ..."
+        <audio button="r" preload="auto" src="./sounds/sodo.webm" />
+      </div>
+      <div>
+        R1: "J'ai du talent"
+        <audio button="r1" preload="auto" src="./sounds/talent.webm" />
+      </div>
     </div>
     <div class="disconnected">
       No gamepad connected
