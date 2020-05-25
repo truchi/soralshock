@@ -1,18 +1,13 @@
-import Gamepad, { MAP } from './Gamepad.js'
+import Gamepad from './Gamepad.js'
 import SoundBox from './SoundBox.js'
 
-let $target
 let $connected
 let $disconnected
 let $sounds
 let gamepad
 let soundbox
-window.gamepad = gamepad
-window.soundbox = soundbox
-window.$sounds = $sounds
 
 const onLoad = () => {
-  $target = document.querySelector('.target')
   $connected = document.querySelector('.connected')
   $disconnected = document.querySelector('.disconnected')
   $sounds = [...$connected.querySelectorAll('audio')]
@@ -21,9 +16,11 @@ const onLoad = () => {
 }
 
 const onConnect = (event) => {
-  gamepad = new Gamepad(navigator.getGamepads()[0], $target).listen()
-  soundbox = new SoundBox($sounds, $target).listen()
-  console.log('CONNECTED', gamepad)
+  gamepad = new Gamepad(navigator.getGamepads()[0]).listen()
+  soundbox = new SoundBox($sounds).listen()
+  window.gamepad = gamepad
+  window.soundbox = soundbox
+  console.log('CONNECTED', gamepad, soundbox)
 
   window.removeEventListener('gamepadconnected', onConnect)
   window.addEventListener('gamepaddisconnected', onDisconnect)
@@ -32,6 +29,7 @@ const onConnect = (event) => {
 }
 
 const onDisconnect = (event) => {
+  console.log('DISCONNECTED')
   gamepad.unlisten()
   soundbox.unlisten()
   window.removeEventListener('gamepaddisconnected', onDisconnect)
